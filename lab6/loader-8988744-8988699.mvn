@@ -1,0 +1,61 @@
+0B00 0000 ; Endereço de retorno
+0B02 D300 ; Lê endereço inicial
+0B04 4D04 ; Add no CheckSum
+0B06 9D04 ; Salvo como novo CheckSum
+0B08 5D0A ; Subtraio 2
+0B0A 9D0E ; Guarda
+0B0C D300 ; Lê número de palavras
+0B0E 9D02 ; Guarda número de palavras para o contador
+0B10 9D16 ; Guarda número de palavras para comparação
+0B12 5D14 ; Subtraio do número de palavras do arquivo
+0B14 1B1A ; Se 0 pulo
+0B16 2B1A ; se negativo pulo
+0B18 9D14 ; Se nada, número de palavras do arquivo
+0B1A 8D16 ; Carrego o número de palavras
+0B1C 4D04 ; Add no CheckSum
+0B1E 9D04 ; Salvo como novo CheckSum
+
+; Loop para ler os arquivos dentro do bloco
+0B20 8D0E ; Carrega endereço de armazenamento
+0B22 4D0A ; Soma com a constante 0x002
+0B24 9D0E ; Salvo como novo endereço
+0B26 4D0C ; Somo com operação de salvar
+0B28 9B2C ; Guardo para ser executado
+0B2A D300 ; Leio 2 Bytes do Dump
+0B2C 0000 ; Salvo na memória
+0B2E 4D04 ; Add no Checksum
+0B30 9D04 ; Salvo no Checksum
+0B32 8D02 ; Carrego número de palvras no bloco
+0B34 5D06 ; Subtraio da constante 0x001
+0B36 9D02 ; Salvo como novo número de palavras
+0B38 1B3C ; Se 0 caio fora do loop
+0B3A 0B20 ; Jump para o começo do loop
+
+; Verificação 
+0B3C D300 ; Leio o Checksum
+0B3E 5D04 ; Subtraio com o meu Checksum
+0B40 1B4A ; Jump para tudo ok
+0B42 8D10 ; Carrega ER
+0B44 E100 ; Imprime
+0B46 8D12 ; Carrega RO
+0B48 E100 ; Imprime
+0B4A 8D16 ; Carrego número de palavras do bloco
+0B4C 5D14 ; Subtraio do número de palavras do arquivo
+0B4E 2B56 ; Se negativo pulo
+0B50 8D08 ; Se não, carrego a constante 0x000
+0B52 9D04 ; Zero o checksum
+0B54 0B02 ; Jump para o começo
+0B56 BB00 ; Encerro sub rotina
+
+; Constantes
+0D02 0000 ; Contador para o número de palavras no bloco
+0D04 0000 ; Constante para o CheckSum
+0D06 0001 ; Constante 0x001
+0D08 0000 ; Constante 0x000
+0D0A 0002 ; Constante 0x002
+0D0C 9000 ; Op Code de Save
+0D0E 0000 ; Subendereço de armazenamento
+0D10 4552 ; ER
+0D12 524F ; RO
+0D14 0000 ; Constante número de palavras arquivo
+0D16 0000 ; Constante número de palavras do bloco
