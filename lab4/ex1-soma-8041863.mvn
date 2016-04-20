@@ -1,0 +1,8 @@
+0000 0016 ; Pula instrucao inicial
+0010 014D ; Cte 333 na posicao da mem
+0012 FF91 ; Cte -111 na posicao de mem
+0014 0000 ; Posicao de mem para o resultado
+0016 8010 ; Load 333 no acumulador
+0018 4012 ; +  -111 ao conteúdo do acumulador
+001A 9014 ; Move o res na posicao 
+001C C01C ; End

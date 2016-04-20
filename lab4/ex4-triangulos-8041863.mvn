@@ -1,0 +1,106 @@
+0000 0100
+
+; =========================================================================== 
+; Área de dados 
+; =========================================================================== 
+;
+0010 0006  ; Lado A
+0012 0004  ; Lado B
+0014 0005  ; Lado C
+0016 0000  ; Resultado
+0018 0000  ; Constante 0x000
+001A 0001  ; Constante 0x001
+001C 0002  ; Constante 0x002
+001E 0003  ; Constante 0x003
+0020 0000  ; Hip
+0022 0000  ; Cateto 1
+0024 0000  ; Cateto 2
+0026 0000  ; Variável 1
+0028 0000  ; Variável 2
+
+; 
+; =========================================================================== 
+; Programa
+; =========================================================================== 
+
+; 1 - Classificação dos lados
+
+0100 8010  ; Carrego A
+0102 5012  ; Subtraio B
+0104 2128  ; Se A < B pulo   
+0106 8010  ; Carrego A
+0108 5014  ; Subtraio C
+010A 211A  ; Se A < C pulo   
+010C 8010  ; Carrego A
+010E 9020  ; Salvo A em Hip
+0110 8012  ; Carrego B
+0112 9022  ; Salvo B em Cateto 1
+0114 8014  ; Subtraio C
+0116 9024  ; Salvo C em Cateto 2
+0118 0200  ; Jump para a próxima etapa
+011A 8014  ; Carrego C
+011C 9020  ; Salvo C como HIP
+011E 8010  ; Carrego A
+0120 9022  ; Salvo A como Cateto 1
+0122 8012  ; Carrego B
+0124 9024  ; Salvo B como Cateto 2
+0126 0200  ; Jump para a próxima etapa
+0128 8012  ; Carrego B
+012A 5014  ; Subtraio C
+012C 213C  ; Se B < C pulo  
+012E 8012  ; Carrego B
+0130 9020  ; Salvo B como Hip
+0132 8010  ; Carrego A
+0134 9022  ; Salvo A como Cateto 1
+0136 8014  ; Carrego C
+0138 9024  ; Salvo C como Cateto 2
+013A 0200  ; Jump para a próxima etapa
+013C 8014  ; Carrego C
+013E 9020  ; Salvo C como Hip
+0140 8012  ; Carrego B
+0142 9022  ; Salvo B como Cateto 1
+0144 8010  ; Carrego A
+0146 9024  ; Salvo A como Cateto 2
+0148 0200  ; Jump para a próxima etapa
+
+; 2 - Verificação de existência
+
+0200 8022 ; Carrego Cateto 1
+0202 4024 ; Somo com Cateto 2
+0204 5020 ; Subtraio com a Hip
+0206 120C ; Desvio se é 0
+0208 220C ; Desvio se é negativo
+020A 0300 ; Jump para a próxima etapa
+020C 8018 ; Carrego a constante 0
+020E 9016 ; Salvo em Resultado
+0210 0328 ; Jump para o fim
+
+
+; 3 - Classificação do Tipo
+
+0300 8020  ; Carrego Hip
+0302 6020  ; Elevo ao quadrado
+0304 9026  ; Salvo na Variável 1
+0306 8022  ; Carrego Cateto 1
+0308 6022  ; Elevo ao quadrado
+030A 9028  ; Salvo na variável 2
+030C 8024  ; Carrego Cateto 2
+030E 6024  ; Elevo ao quadrado
+0310 4028  ; Somo com a variável 2
+0312 5026  ; Subtraio com a variável 1
+0314 131E  ; Se 0 eu desvio para dar retângulo
+0316 2324  ; Se negativo desvio para dar obtusângulo
+0318 801C  ; Carrego a constante 0x002
+031A 9016  ; Salvo na resposta
+031C 0328  ; Jump para o fim
+031E 801A  ; Carrego a constante 0x001
+0320 9016  ; Salvo na resposta
+0322 0328  ; Jump para o fim
+0324 801E  ; Carrego a constante 0x003
+0326 9016  ; Salvo na resposta
+
+0328 C328  ; END
+
+
+
+

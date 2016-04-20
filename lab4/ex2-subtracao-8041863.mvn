@@ -1,0 +1,19 @@
+0000 0016 ; inicio do programa
+0010 000A ; coloca 10 na posicao de mem
+0012 0008 ; coloca 8 na posicao de mem
+0014 0000 ; local reservado para o resultado
+0016 8010 ; carrega 10 no acumulador
+0018 9024 ; salva 10 na posicao de memoria da variavel x
+001A 8012 ; carrega 8 no acumulador
+001C 9026 ; salva 8 na posicao de memoria da variavel y
+001E A028 ; chama a subrotina subtrair
+0020 9014 ; salva o resultado na memoria
+0022 C022 ; encerra o programa
+
+0024 0000 ; local de memoria para a variavel x
+0026 0000 ; local de memoria para a variavel y
+
+0028 0000 ; inicio da subrotina
+002A 8024 ; carrega o valor de x no acumulador
+002C 5026 ; subtrai y do acumulador
+002E B028 ; termina a subrotina

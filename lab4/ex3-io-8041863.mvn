@@ -1,0 +1,78 @@
+0000 010A  ; Pula para o início do programa
+
+; =========================================================================== 
+; Área de dados 
+; =========================================================================== 
+;
+00F4 0000  ; Constante: 0x000 
+00F6 0001  ; Constante: 0x001 
+00F8 0100  ; Constante: 0x100 
+00FA 0000  ; Variável: Número 1 Byte 1 
+00FC 0000  ; Variável: Número 1 Byte 2 
+00FE 0000  ; Variável: Parcial 1
+0100 0000  ; Variável: Parcial 2
+0102 000A  ; Constante: 0x00A
+0104 0000  ; Variável: Número 2 Byte 1
+0106 0000  ; Variável: Número 2 Byte 2
+0108 0030  ; Constante: 0x030
+; 
+; =========================================================================== 
+; Programa
+; =========================================================================== 
+
+010A D000  ; Lê dois Bytes do teclado
+010C 90FE  ; Salva em Parcial 1
+010E 60F8  ; Multiplica o valor lido por 0x100
+0110 70F8  ; Divide o valor lido por 0x100
+0112 5108  ; Subtrai por 0x030
+0114 90FC  ; Salva na variável Número 1 Byte 2
+0116 80FE  ; Carrega Parcial 1
+0118 70F8  ; Divide o valor lido por 0x100
+011A 5108  ; Subtrai por 0x030
+011C 90FA  ; Salva na variável Número 1 Byte 1
+011E D000  ; Lê dois Bytes do teclado
+0120 D000  ; Lê dois Bytes do teclado
+0122 9100  ; Salva em Parcial 2
+0124 60F8  ; Multiplica o valor lido por 0x100
+0126 70F8  ; Divide o valor lido por 0x100
+0128 5108  ; Subtrai por 0x030
+012A 9106  ; Salva na variável Número 2 Byte 2
+012C 8100  ; Carrega Parcial 2
+012E 70F8  ; Divide o valor lido por 0x100
+0130 5108  ; Subtrai por 0x030
+0132 9104  ; Salva na variável Número 2 Byte 1
+0134 80FC  ; Carrega a variável Número 1 Byte 2
+0136 4106  ; Soma com a variável Número 2 Byte 2
+0138 90FE  ; Salva em Parcial 1
+013A 80F4  ; Carrega Constante 0x000
+013C 9100  ; Salva em Parcial 2
+013E 8102  ; Carrega a constante 0x00A
+0140 50FE  ; Subtrai com Parcial 1
+0142 115C  ; Desvio se 0 para tratamento
+0144 215C  ; Desvio se negativo para tratamento
+0146 80FE  ; Carrega Parcial 1
+0148 4108  ; Soma com 0x030
+014A 90FE  ; Salva Parcial 1
+014C 80FA  ; Carrega variável Número 1 Byte 1
+014E 4104  ; Soma com a variável Número 2 Byte 1
+0150 4100  ; Soma com a Parcial 2
+0152 4108  ; Soma com 0x030
+0154 E100  ; Imprime
+0156 80FE  ; Carrega Parcial 1
+0158 E100  ; Imprime
+015A C15A  ; End
+
+015C 80FE  ; Carrega Parcial 1
+015E 5102  ; Subtrai por 0x00A
+0160 90FE  ; Salva Parcial 1
+0162 8100  ; Carrega Parcial 2
+0164 40F6  ; Soma com 0x001
+0166 9100  ; Salva Parcial 2
+0168 0146  ; Jump para o resto do programa
+
+
+
+
+
+
+
